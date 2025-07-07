@@ -1,0 +1,100 @@
+<div class="container">
+
+ <!-- Materias inscritas -->
+  <div class="mb-4">
+    <h5 class="mb-3">Materias inscritas</h5>
+
+    @if (subjects.length > 0) {
+        <div class="row">
+            @for (subject of subjects; track subject.subjectId) {
+                <div class="col-md-6 mb-3">
+                <div class="card p-3 shadow-sm">
+                    <div class="row align-items-center">
+                    <div class="col-10">
+                        <h6 class="mb-1">{{ subject.subjectName }}</h6>
+                        <p class="text-muted mb-1">Profesor: {{ subject.professorName }}</p>
+                        <p class="text-muted small">
+                            Compañeros:
+                            {{ getShortClassmates(subject) }}
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-outline-danger" (click)="confirmUnenroll(subject.subjectId)">
+                        <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            }
+        </div>
+    } @else {
+      <div class="card p-3 shadow-sm">
+        <p class="text-muted mb-1">No tienes materias inscritas aún.</p>
+      </div>
+    }
+  </div>
+
+  <!-- Acciones -->
+  <div class="mb-4 d-flex gap-2">
+    <div class="text-end mb-3">
+        <button class="btn btn-outline-secondary" (click)="openModalSubject()">
+           <i class="bi bi-plus-circle me-1"></i> Inscribir materias
+        </button>
+    </div>
+    <div class="text-end mb-3">
+        <button class="btn btn-outline-secondary" (click)="openModalEdit()">
+            <i class="bi bi-pencil-square me-1"></i> Editar perfil
+        </button>
+    </div>
+  </div>
+
+  <!-- Estudiantes registrados -->
+  <div>
+    <h5 class="mb-3">Estudiantes registrados</h5>
+
+    <div class="table-container rounded shadow-sm overflow-hidden border">
+        <table class="custom-table w-100 m-0">
+            <thead>
+                <tr>
+                <th>Estudiante</th>
+                <th>Materias</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of studentsWithSubjectsDTO">
+                <td>{{ student.fullName }}</td>
+                <td>{{ student.subjects.join(', ') }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+</div>
+
+@if (showModalSubject) {
+  <app-enroll-subjects-modal
+    [availableSubjects]="availableSubjects"
+    [subjects]="subjects"
+    (close)="showModalSubject = false"
+    (enroll)="handleEnrollment($event)"
+  />
+}
+
+@if (showModalEdit) {
+  <app-edit-profile-modal
+    [studentProfile]="studentProfile"
+    (close)="showModalEdit = false"
+    (save)="handleProfileUpdate($event)"
+  />
+}
+
+@if (selectedSubjectIdToDelete) {
+  <app-confirm-modal
+    title="¿Deseas eliminar esta materia?"
+    message="Una vez eliminada, deberás volver a inscribirte si la necesitas."
+    (confirm)="handleDelete()"
+    (cancel)="selectedSubjectIdToDelete = null"
+  />
+}

@@ -1,0 +1,50 @@
+<div class="modal show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5)">
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
+      <h5 class="mb-4 text-center">
+        <i class="bi bi-journal-plus me-2"></i> Registrar Materia
+      </h5>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="bi bi-book me-1"></i> Nombre de la Materia
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            [class.is-invalid]="form.get('name')?.invalid && form.get('name')?.touched"
+          />
+          <div class="invalid-feedback">El nombre es obligatorio.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="bi bi-person-badge me-1"></i> Profesor Asignado
+          </label>
+          <select
+            class="form-select"
+            formControlName="professorId"
+            [class.is-invalid]="form.get('professorId')?.invalid && form.get('professorId')?.touched"
+          >
+            <option value="" disabled selected>Seleccione un profesor</option>
+            @for (p of professors; track p.id) {
+              <option [value]="p.id">{{ p.name }}</option>
+            }
+          </select>
+          <div class="invalid-feedback">Debe seleccionar un profesor.</div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4 gap-2">
+          <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">
+            <i class="bi bi-x-lg"></i> Cancelar
+          </button>
+          <button type="submit" class="ms-1 btn btn-success" [disabled]="form.invalid">
+            <i class="bi bi-check-lg"></i> Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

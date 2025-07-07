@@ -1,0 +1,33 @@
+<div class="modal show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5)">
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 800px;">
+      <h5 class="mb-3 text-center">Materias Disponibles</h5>
+      <p  class="mb-3 text-center">Selecciona 3 materias</p>
+
+      <div class="row">
+        @for (subject of availableSubjects; track subject.id) {
+          <div class="col-md-4 mb-3">
+            <div
+              class="card p-3 shadow-sm text-center border cursor-pointer"
+              [class.border-success]="isSelected(subject)"
+              (click)="toggleSelection(subject)"
+              style="transition: 0.2s ease"
+            >
+              <h6 class="mb-1">{{ subject.name }}</h6>
+              <p class="text-muted small mb-0">Profesor: {{ subject.professorName }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="text-center mt-3">
+        <button class="btn btn-outline-success" (click)="confirmSelection()">
+          Confirmar selección
+        </button>
+        <button class="btn btn-outline-secondary ms-2" (click)="close.emit()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

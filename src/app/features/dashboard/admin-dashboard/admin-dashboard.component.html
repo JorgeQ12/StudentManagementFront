@@ -1,0 +1,94 @@
+@if(!showManageStudent && !showManageSubject && !showManageProfessor){
+    <div class="d-flex justify-content-center align-items-center flex-column mt-5">
+        <div class="row w-100 justify-content-center" style="max-width: 900px;">
+            
+            <div class="col-md-6 mb-4">
+            <div class="card p-4 h-100 shadow-sm text-center align-items-center">
+                <i class="bi bi-people-fill fs-1 text-muted mb-3"></i>
+                <h5 class="mb-1">Gestionar Estudiantes</h5>
+                <p class="text-muted mb-3 small">Registrar, editar o eliminar estudiantes.</p>
+                <button class="btn btn-outline-secondary" (click)="openManageStudent()">
+                    <i class="bi bi-arrow-right"></i> Gestionar
+                </button>
+            </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+            <div class="card p-4 h-100 shadow-sm text-center align-items-center">
+                <i class="bi bi-journal-text fs-1 text-muted mb-3"></i>
+                <h5 class="mb-1">Gestionar Materias</h5>
+                <p class="text-muted mb-3 small">Registrar o eliminar materias.</p>
+                <button class="btn btn-outline-secondary" (click)="openManageSubject()">
+                    <i class="bi bi-arrow-right"></i> Gestionar
+                </button>
+            </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+            <div class="card p-4 h-100 shadow-sm text-center align-items-center">
+                <i class="bi bi-person-standing fs-1 text-muted mb-3"></i>
+                <h5 class="mb-1">Gestionar Profesores</h5>
+                <p class="text-muted mb-3 small">Registrar o eliminar profesores.</p>
+                <button class="btn btn-outline-secondary" (click)="openManageProfessor()">
+                    <i class="bi bi-arrow-right"></i> Gestionar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showManageStudent) {
+    <app-manage-students
+        [studentProfile]="studentProfile"
+        (close)="showManageStudent = false"
+        (updateStudent)="updateStudent($event)"
+        (deleteStudent)="deleteStudent($event)"
+        (registerStudent)="registerStudent($event)"
+    />
+}
+
+@if(showManageSubject){
+    <app-manage-subjects
+        [subjects]="subjects"
+        [professors]="professors"
+        (close)="showManageSubject = false"
+        (registerSubject)="saveSubject($event)"
+        (deleteSubject)="confirmDeleteSubject($event)"
+    />
+}
+
+@if(showManageProfessor){
+    <app-manage-professors
+        [professors]="professors"
+        (close)="showManageProfessor = false"
+        (registerProfessor)="saveProfessor($event)"
+        (deleteProfessor)="confirmDeleteProfessor($event)"
+    />
+}
+
+@if (selectedStudentDelete) {
+    <app-confirm-modal
+        title="¿Deseas eliminar el estudiante?"
+        message="Una vez eliminado, deberás volver a crear el estudiante."
+        (confirm)="handleDelete()"
+        (cancel)="selectedStudentDelete = false"
+    />
+}
+
+@if (showDeleteSubjectModal) {
+  <app-confirm-modal
+    title="¿Deseas eliminar la materia?"
+    message="Una vez eliminada, no podrás recuperarla."
+    (confirm)="deleteSubject()"
+    (cancel)="showDeleteSubjectModal = false" />
+}
+
+@if (showDeleteProfessorModal) {
+  <app-confirm-modal
+    title="¿Deseas eliminar el profesor?"
+    message="Una vez eliminado, deberás volver a crear el profesor."
+    (confirm)="deleteProfessor()"
+    (cancel)="showDeleteSubjectModal = false" />
+}
+

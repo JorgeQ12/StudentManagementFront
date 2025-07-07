@@ -1,1 +1,124 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-card: #f9f9f9;
+  --bg-input: #f0f0f0;
+  --text-primary: #333;
+  --text-muted: #777;
+  --btn-bg: #e0e0e0;
+  --btn-hover: #d0d0d0;
+  --border-radius: 0.75rem;
+  --transition: all 0.2s ease;
+  --bg-main: #f2f2f2;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-minimal {
+  background-color: var(--btn-bg);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+.btn-minimal:hover {
+  background-color: var(--btn-hover);
+}
+
+.input-group-text {
+  background-color: var(--bg-input);
+  border: none;
+  color: var(--text-muted);
+}
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+
+  thead {
+    background-color: #f7f7f7;
+    text-align: left;
+  }
+
+  th, td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover {
+    background-color: #f2f2f2;
+  }
+
+  th {
+    font-weight: 600;
+    color: #444;
+  }
+
+  td {
+    color: #555;
+  }
+}
+
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+input:disabled,
+textarea:disabled 
+{
+  background-color: #e9ecef !important;
+  cursor: not-allowed;
+  border-color: #ccc !important;
+  color: #6c757d !important;
+}
+
+input[readonly],
+select[readonly] 
+{
+  background-color: #e9ecef !important;
+  border-color: #ccc !important;
+  color: #6c757d !important;
+  cursor: default;
+}
+
+input:focus,
+select:focus
+{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+select:disabled {
+  background-color: #e9ecef !important;
+  color: #6c757d !important;
+  border-color: #ccc !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+

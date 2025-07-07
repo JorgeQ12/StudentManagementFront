@@ -1,0 +1,47 @@
+<div class="container mt-5 pt-4">
+  <h5 class="mb-4 text-center">
+    <i class="bi bi-journal-text me-2"></i> Gestión de Materias
+  </h5>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-outline-secondary" (click)="openRegisterSubject()">
+      <i class="bi bi-journal-plus me-1"></i> Registrar Materia
+    </button>
+    <button class="ms-1 btn btn-outline-dark" (click)="closePanel()">
+        <i class="bi bi-arrow-left me-1"></i> Regresar
+    </button>
+  </div>
+
+  <div class="table-container rounded shadow-sm overflow-hidden border">
+    <table class="custom-table w-100 m-0">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Profesor</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (subject of subjects; track subject.id) {
+          <tr>
+            <td>{{ subject.name }}</td>
+            <td>{{ subject.professorName }}</td>
+            <td class="text-center">
+              <button class="btn btn-outline-danger" (click)="deleteSubject.emit(subject.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (showRegisterModal) {
+  <app-register-subject-modal
+    [professors]="professors"
+    (close)="closeRegisterModal()"
+    (register)="handleRegisterSubject($event)"
+  />
+}

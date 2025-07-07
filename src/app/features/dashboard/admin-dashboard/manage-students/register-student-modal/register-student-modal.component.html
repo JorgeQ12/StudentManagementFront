@@ -1,0 +1,148 @@
+<div class="modal show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5)">
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 600px;">
+      <h4 class="mb-4 text-center">
+        <i class="bi bi-person-plus-fill me-2"></i> Registro de Estudiante
+      </h4>
+
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Usuario</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
+              <input type="text" class="form-control" formControlName="Username"
+                [class.is-invalid]="isInvalid('Username')" />
+            </div>
+            <div class="invalid-feedback" *ngIf="isInvalid('Username')">
+              Usuario requerido.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Contraseña</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+              <input type="password" class="form-control" formControlName="password"
+                [class.is-invalid]="isInvalid('password')" />
+            </div>
+            <div class="invalid-feedback" *ngIf="isInvalid('password')">
+              Contraseña requerida.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" formControlName="firstName"
+              [class.is-invalid]="isInvalid('firstName')" />
+            <div class="invalid-feedback" *ngIf="isInvalid('firstName')">Nombre requerido.</div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Segundo Nombre</label>
+            <input type="text" class="form-control" formControlName="middleName" />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Apellido</label>
+            <input type="text" class="form-control" formControlName="lastName"
+              [class.is-invalid]="isInvalid('lastName')" />
+            <div class="invalid-feedback" *ngIf="isInvalid('lastName')">Apellido requerido.</div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Segundo Apellido</label>
+            <input type="text" class="form-control" formControlName="secondLastName" />
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Correo Electrónico</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+              <input type="email" class="form-control" formControlName="email"
+                [class.is-invalid]="isInvalid('email')" />
+            </div>
+            <div class="invalid-feedback" *ngIf="isInvalid('email')">
+              Correo inválido o requerido.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Tipo de documento</label>
+            <select class="form-select" formControlName="documentType"
+              [class.is-invalid]="isInvalid('documentType')">
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="CC">Cédula de Ciudadanía</option>
+              <option value="TI">Tarjeta de Identidad</option>
+              <option value="CE">Cédula de Extranjería</option>
+              <option value="PP">Pasaporte</option>
+              <option value="NIT">NIT</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="isInvalid('documentType')">
+              Tipo Documento requerido.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Número de Documento</label>
+            <input type="text" class="form-control" formControlName="documentNumber"
+              [class.is-invalid]="isInvalid('documentNumber')" />
+            <div class="invalid-feedback" *ngIf="isInvalid('documentNumber')">
+              Número requerido.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="text" class="form-control" formControlName="phoneNumber"
+              [class.is-invalid]="isInvalid('phoneNumber')" />
+            <div class="invalid-feedback" *ngIf="isInvalid('phoneNumber')">
+              Teléfono requerido.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" formControlName="birthDate"
+              [class.is-invalid]="isInvalid('birthDate')" />
+            <div class="invalid-feedback" *ngIf="isInvalid('birthDate')">
+              Fecha requerida.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Género</label>
+            <select class="form-select" formControlName="gender"
+              [class.is-invalid]="isInvalid('gender')">
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              <option value="Otro">Otro</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="isInvalid('gender')">
+              Género requerido.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Dirección</label>
+            <input type="text" class="form-control" formControlName="address"
+              [class.is-invalid]="isInvalid('address')" />
+            <div class="invalid-feedback" *ngIf="isInvalid('address')">
+              Dirección requerida.
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+          <button type="button" class="btn btn-outline-secondary" (click)="close.emit()">
+            <i class="bi bi-x-lg"></i> Cancelar
+          </button>
+          <button type="submit" class="ms-1 btn btn-success" [disabled]="registerForm.invalid">
+            <i class="bi bi-person-plus-fill"></i> Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

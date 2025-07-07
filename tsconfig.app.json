@@ -9,6 +9,10 @@
   "include": [
     "src/**/*.ts"
   ],
+  "angularCompilerOptions": {
+    "enableTemplateStatements": true,
+    "enableControlFlow": true
+  },
   "exclude": [
     "src/**/*.spec.ts"
   ]

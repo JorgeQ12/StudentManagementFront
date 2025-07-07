@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <div class="row align-items-center text-center">
+        <div class="col-10">
+            <h3><i class="bi bi-speedometer2 me-2"></i> Bienvenido al Panel de Control</h3>
+            <p class="text-muted">Hola, {{ username() }}. Desde aquí puedes gestionar el sistema.</p>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-outline-dark" (click)="logout()">
+                <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
+            </button>
+        </div>
+    </div>
+    
+
+
+    <div class="mt-4">
+        @switch (role()){
+            @case ('Admin') {
+                <app-admin-dashboard />
+            }
+            @case ('Student') {
+                <app-student-dashboard />
+            }
+            @default {
+                <p class="text-danger">Rol no autorizado para acceder al sistema.</p>
+            }
+        }
+    </div>
+</div>

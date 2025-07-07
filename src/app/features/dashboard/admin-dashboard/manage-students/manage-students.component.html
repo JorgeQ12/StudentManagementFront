@@ -1,0 +1,103 @@
+<div class="container mt-5 pt-5">
+  <h5 class="mb-4 text-center">
+    <i class="bi bi-people-fill me-2"></i> Gestionar Estudiantes
+  </h5>
+
+    <div class="d-flex justify-content-end gap-2 mb-3">
+        <button class="btn btn-outline-secondary" (click)="openRegisterStudent()">
+            <i class="bi bi-person-plus me-1"></i> Registrar Estudiante
+        </button>
+        <button class="ms-1 btn btn-outline-dark" (click)="closePanel()">
+            <i class="bi bi-arrow-left me-1"></i> Regresar
+        </button>
+    </div>
+
+
+  <div class="table-container rounded shadow-sm overflow-hidden border">
+    <table class="custom-table w-100 m-0">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Documento</th>
+          <th>Teléfono</th>
+          <th>Fecha Nacimiento</th>
+          <th>Género</th>
+          <th>Dirección</th>
+          <th>Activo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (group of formArray.controls; track group.value.id; let i = $index) {
+          <tr [formGroup]="group">
+            <td>
+              <input type="email" class="form-control"
+                formControlName="email" [readonly]="!editingRow[i]" />
+            </td>
+
+            <td>
+              <div class="d-flex gap-1">
+                <select class="form-select" formControlName="documentType" [disabled]="!editingRow[i]">
+                  <option value="" disabled>Seleccione</option>
+                  @for(type of documentTypes; track type) {
+                    <option [value]="type">{{ type }}</option>
+                  }
+                </select>
+                <input class="form-control" formControlName="documentNumber" [readonly]="!editingRow[i]" />
+              </div>
+            </td>
+
+            <td>
+              <input class="form-control" formControlName="phoneNumber" [readonly]="!editingRow[i]" />
+            </td>
+
+            <td>
+              <input type="date" class="form-control" formControlName="birthDate" [readonly]="!editingRow[i]" />
+            </td>
+
+            <td>
+              <select class="form-select" formControlName="gender" [disabled]="!editingRow[i]">
+                <option value="" disabled>Seleccione</option>
+                @for(g of genders; track g) {
+                  <option [value]="g">{{ g }}</option>
+                }
+              </select>
+            </td>
+
+            <td>
+              <input class="form-control" formControlName="address" [readonly]="!editingRow[i]" />
+            </td>
+
+            <td class="text-center">
+              <input type="checkbox" class="form-check-input" formControlName="isActive" [disabled]="!editingRow[i]" />
+            </td>
+
+            <td>
+              <div class="d-flex gap-1 justify-content-center">
+                @if (!editingRow[i]) {
+                  <button class="btn btn-outline-secondary" (click)="editRow(i)">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="ms-1 btn btn-outline-danger" (click)="deleteStudent.emit(group.get('id')?.value)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                } @else {
+                  <button class="btn btn-success" (click)="save(i)">
+                    <i class="bi bi-check-lg"></i>
+                  </button>
+                }
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (showRegisterModal) {
+  <app-register-student-modal
+    (close)="closeRegisterModal()"
+    (registerStudent)="handleRegisterStudent($event)"
+  />
+}

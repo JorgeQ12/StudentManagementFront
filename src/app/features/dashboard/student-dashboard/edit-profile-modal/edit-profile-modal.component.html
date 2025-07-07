@@ -1,0 +1,103 @@
+<div class="modal show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5)">
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow w-100" style="max-width: 700px">
+      <h5 class="text-center mb-5">
+        <i class="bi bi-person-lines-fill me-2"></i> Editar Perfil del Estudiante
+      </h5>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="fullName" class="form-label">
+                <i class="bi bi-person-circle me-1"></i> Nombre completo
+              </label>
+              <input id="fullName" type="text" class="form-control" [value]="studentProfile.fullName" disabled/>
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-envelope-fill me-1"></i> Email
+              </label>
+              <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': form.get('email')?.invalid && form.get('email')?.touched }" />
+              <div class="invalid-feedback">Correo válido requerido.</div>
+            </div>
+
+            <!-- Tipo documento -->
+            <div class="col-md-6 mb-3">
+              <label for="documentType" class="form-label">
+                <i class="bi bi-card-text me-1"></i> Tipo de documento
+              </label>
+              <select id="documentType" class="form-select" formControlName="documentType" [ngClass]="{ 'is-invalid': form.get('documentType')?.invalid && form.get('documentType')?.touched }">
+                <option value="" disabled selected>Seleccione una opción</option>
+                @for(type of documentTypes; track type){
+                  <option [value]="type">{{ type }}</option>
+                }
+              </select>
+              <div class="invalid-feedback">Tipo Documento requerido.</div>
+            </div>
+
+            <!-- Documento -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-hash me-1"></i> Número de documento
+              </label>
+              <input type="text" class="form-control" formControlName="documentNumber" [ngClass]="{ 'is-invalid': form.get('documentNumber')?.invalid && form.get('documentNumber')?.touched }" />
+              <div class="invalid-feedback">Número de documento requerido.</div>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-telephone-fill me-1"></i> Teléfono
+              </label>
+              <input type="text" class="form-control" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched }" />
+              <div class="invalid-feedback">Teléfono requerido.</div>
+            </div>
+
+            <!-- Fecha nacimiento -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-calendar-date me-1"></i> Fecha de nacimiento
+              </label>
+              <input type="date" class="form-control" formControlName="birthDate" [ngClass]="{ 'is-invalid': form.get('birthDate')?.invalid && form.get('birthDate')?.touched }" />
+              <div class="invalid-feedback">Fecha requerida.</div>
+            </div>
+
+            <!-- Género -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-gender-ambiguous me-1"></i> Género
+              </label>
+              <select class="form-select" formControlName="gender" [ngClass]="{ 'is-invalid': form.get('gender')?.invalid && form.get('gender')?.touched }">
+                <option value="" disabled selected>Seleccione una opción</option>
+                 @for(g of genders; track g){
+                    <option [value]="g">{{ g }}</option>
+                  }
+              </select>
+              <div class="invalid-feedback">Género requerido.</div>
+            </div>
+
+            <!-- Dirección -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">
+                <i class="bi bi-house-door-fill me-1"></i> Dirección
+              </label>
+              <input type="text" class="form-control" formControlName="address" [ngClass]="{ 'is-invalid': form.get('address')?.invalid && form.get('address')?.touched }" />
+              <div class="invalid-feedback">Dirección requerida.</div>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="text-center mt-5">
+          <button type="submit" class="btn btn-outline-success me-2">
+            <i class="bi bi-check2-circle me-1"></i> Guardar
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="close.emit()">
+            <i class="bi bi-x-circle me-1"></i> Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
